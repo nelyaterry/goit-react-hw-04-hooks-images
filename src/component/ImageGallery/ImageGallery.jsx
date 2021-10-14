@@ -36,6 +36,9 @@ const ImageGallery = ({ request }) => {
   }, [request]);
 
   useEffect(() => {
+    if (page === 1) {
+      return;
+    }
     fetchImagine(request, page)
       .then((response) => {
         setImages((imges) => [...imges, ...response.data.hits]);
@@ -65,7 +68,6 @@ const ImageGallery = ({ request }) => {
   };
 
   if (status === "idle") {
-    console.log(status);
     return (
       <Content>
         <h1>Введите запрос</h1>
@@ -74,15 +76,10 @@ const ImageGallery = ({ request }) => {
   }
 
   if (status === "pending") {
-    console.log(status);
-
     return <Download />;
   }
 
   if (status === "resolved") {
-    console.log(status);
-    console.log(images);
-
     return (
       <Content>
         <Gallery>
@@ -102,8 +99,6 @@ const ImageGallery = ({ request }) => {
   }
 
   if (status === "regected") {
-    console.log(status);
-
     return (
       <Content>
         <h1>По вашему запросу нет данных</h1>
