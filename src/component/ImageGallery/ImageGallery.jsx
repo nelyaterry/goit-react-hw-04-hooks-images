@@ -24,7 +24,7 @@ const ImageGallery = ({ request }) => {
     setPage(1);
     setStatus("pending");
 
-    fetchImagine(request, page).then((response) => {
+    fetchImagine(request, 1).then((response) => {
       if (response.data.total === 0) {
         setStatus("regected");
       } else {
